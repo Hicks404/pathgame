@@ -1,9 +1,21 @@
 #include <cstdlib>
 #include <iostream>
 
+#include <raylib/raylib.h>
+
 int main(int argC, char* argV[])
 {
-	std::cout << "Hello, World!\n";
+	InitWindow(800, 600, "Path");
+
+	while (!WindowShouldClose())
+	{
+		BeginDrawing();
+		ClearBackground(RAYWHITE);
+
+		DrawCircle(400, 300, 25.f, RED);
+
+		EndDrawing();
+	}
 
 	return EXIT_SUCCESS;
 }
