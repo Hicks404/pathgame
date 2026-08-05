@@ -40,9 +40,18 @@ int Application::Run(float runTime, const function<void()>& testStart, const fun
 
 void Application::BeginPlay()
 {
+	// Get terrain data
 	terrain.SetData();
+	//terrain.PrintTD("plains");
 
-	terrain.PrintTD("plains");
+	// Create node map
+	mapGen.CreateMap();
+	nodeMap.Initialise(mapGen.GetNodeMap(), 10);
+
+	// Pathfinding
+	Node* start = nodeMap.GetNode(1, 1);
+	Node* end = nodeMap.GetNode(10, 2);
+	std::vector<Node*> nodeMapPath = nodeMap.DijkstrasSearch(start, end);
 }
 
 void Application::Tick(float dt)
@@ -52,7 +61,7 @@ void Application::Tick(float dt)
 
 void Application::Render()
 {
-	
+	nodeMap.Draw();
 }
 
 void Application::EndPlay()

@@ -28,7 +28,7 @@ trees = false
 color = 0,140,0
 moveSpeed = 1
 tempeture = 25
-fertility = 0
+fertility = 1
 moveable = true
 trees = true
 
@@ -36,7 +36,7 @@ trees = true
 color = 0,200,0
 moveSpeed = 1
 tempeture = 28
-fertility = 0
+fertility = 1
 moveable = true
 trees = true
 
@@ -44,7 +44,7 @@ trees = true
 color = 100,100,10
 moveSpeed = 1
 tempeture = 30
-fertility = 1
+fertility = 0.5
 moveable = true
 trees = true
 
@@ -52,7 +52,7 @@ trees = true
 color = 20,70,20
 moveSpeed = 1
 tempeture = 35
-fertility = 1
+fertility = 0.4
 moveable = true
 trees = false
 
@@ -102,4 +102,28 @@ moveSpeed = 1
 tempeture = 15
 fertility = 0
 moveable = false
+trees = false
+
+[forest]
+color = 100,210,100
+moveSpeed = 0.6
+tempeture = 22
+fertility = 1
+moveable = true
+trees = true
+
+[marsh]
+color = 0,70,50
+moveSpeed = 0.35
+tempeture = 24
+fertility = 1.2
+moveable = true
+trees = true
+
+[drylands]
+color = 0,200,0
+moveSpeed = 1
+tempeture = 43
+fertility = 0.4
+moveable = true
 trees = false

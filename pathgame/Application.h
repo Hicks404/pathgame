@@ -2,6 +2,7 @@
 #include <functional>
 
 #include "TerrainTypes.h"
+#include "MapGenerator.h"
 #include "Pathfinding.h"
 
 using std::function;
@@ -21,7 +22,10 @@ private:
 	const char* title;
 
 private:
+	NodeMap nodeMap;
 	Terrain terrain;
+	MapGenerator mapGen;
+	vector<string> map;
 
 private:
 	void BeginPlay();

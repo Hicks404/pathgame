@@ -8,7 +8,6 @@
 using std::fstream;
 using std::ifstream;
 using std::getline;
-using std::stoi;
 using std::stof;
 
 Terrain::Terrain()

@@ -30,6 +30,9 @@
     <ClCompile Include="TerrainTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MapGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -41,10 +44,18 @@
     <ClInclude Include="TerrainTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MapGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="TerrainStats.txt">
       <Filter>Data</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="WorldMap.txt">
+      <Filter>Data</Filter>
+    </Text>
   </ItemGroup>
 </Project>
