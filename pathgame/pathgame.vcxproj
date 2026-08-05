@@ -159,7 +159,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="TerrainTypes.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="TerrainTypes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TerrainStats.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

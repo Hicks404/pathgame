@@ -1,21 +1,20 @@
 #include <cstdlib>
 #include <iostream>
 
-#include <raylib/raylib.h>
+#include "Application.h"
 
 int main(int argC, char* argV[])
 {
-	InitWindow(800, 600, "Path");
+#if _DEBUG
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); //enables leak detection
+    _CrtSetBreakAlloc(185); //Will automatically cause break point on allocationm with matching Id
+#endif
 
-	while (!WindowShouldClose())
-	{
-		BeginDrawing();
-		ClearBackground(RAYWHITE);
+    Application* app = new Application(800, 420, "Path");
 
-		DrawCircle(400, 300, 25.f, RED);
+    const int state = app->Run();
 
-		EndDrawing();
-	}
+    delete app;
 
-	return EXIT_SUCCESS;
+    return state;
 }

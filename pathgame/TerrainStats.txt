@@ -1,0 +1,92 @@
+# terrain types and data
+
+[deepOcean]
+moveSpeed = 0
+tempeture = 0
+fertility = 0
+moveable = false
+trees = false
+
+[ocean]
+moveSpeed = 0
+tempeture = 18
+fertility = 0
+moveable = false
+trees = false
+
+[shore]
+moveSpeed = 0.7
+tempeture = 19
+fertility = 0
+moveable = true
+trees = false
+
+[plains]
+moveSpeed = 1
+tempeture = 25
+fertility = 0
+moveable = true
+trees = true
+
+[grasslands]
+moveSpeed = 1
+tempeture = 28
+fertility = 0
+moveable = true
+trees = true
+
+[savannah]
+moveSpeed = 1
+tempeture = 30
+fertility = 1
+moveable = true
+trees = true
+
+[steppe]
+moveSpeed = 1
+tempeture = 35
+fertility = 1
+moveable = true
+trees = false
+
+[desert]
+moveSpeed = 1
+tempeture = 43
+fertility = 0.2
+moveable = true
+trees = false
+
+[desertFlood]
+moveSpeed = 1
+tempeture = 40
+fertility = 1.3
+moveable = true
+trees = false
+
+[tundra]
+moveSpeed = 1
+tempeture = 12
+fertility = 0.5
+moveable = true
+trees = true
+
+[polar]
+moveSpeed = 1
+tempeture = 6
+fertility = 0
+moveable = true
+trees = false
+
+[seaIce]
+moveSpeed = 1
+tempeture = -5
+fertility = 0
+moveable = true
+trees = false
+
+[mountains]
+moveSpeed = 1
+tempeture = 15
+fertility = 0
+moveable = false
+trees = false
