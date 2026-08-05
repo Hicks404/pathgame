@@ -12,7 +12,9 @@ using std::stringstream;
 
 MapGenerator::MapGenerator()
 {
-	
+	terrain.SetData();
+
+	terrain.PrintTD("plains");
 }
 
 void MapGenerator::CreateMap()
@@ -47,47 +49,24 @@ void MapGenerator::CreateMap()
 		if (start)
 		{
 			string temp;
-			string fullTemp;
 			stringstream ss(line);
 
 			// adds each letter into temp per loop
 			while (ss >> temp)
 			{
-				fullTemp.append(temp);
+				map.emplace_back(terrain.GetTD(terrainSymbol[temp]));
 			}
-			map.emplace_back(fullTemp);
+
+			terrainData nextLineIndicator;
+			nextLineIndicator.name = "next";
+			map.emplace_back(nextLineIndicator);
+
 			continue;
 		}
 	}
 }
 
-vector<string> MapGenerator::GetMap()
+vector<terrainData> MapGenerator::GetMap()
 {
 	return map;
-}
-
-vector<string> MapGenerator::GetNodeMap()
-{
-	vector<string> NodeMap;
-
-	for (string str : map)
-	{
-		string fullTemp;
-
-		for (string c : map)
-		{
-			if (str == "j" || str == "m" || str == "n")
-			{
-				fullTemp.append("1");
-			}
-			else
-			{
-				fullTemp.append("0");
-			}
-		}
-
-		NodeMap.emplace_back(fullTemp);
-	}
-
-	return NodeMap;
 }

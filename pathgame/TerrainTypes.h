@@ -35,6 +35,8 @@ public:
 	/** Setup data dictionary */
 	void SetData();
 
+	terrainData GetTD(string name);
+
 	/** Prints data of terrain given as string */
 	void PrintTD(string name);
 

@@ -4,6 +4,8 @@
 #include <string>
 #include <raylib/raylib.h>
 
+#include "TerrainTypes.h"
+
 using std::vector;
 using std::string;
 
@@ -15,47 +17,37 @@ struct Edge
 	float cost;
 
 public:
-	Edge() { target = nullptr; cost = 0; }
-	Edge(Node* _target, float _cost) : target{ _target }, cost(_cost) {}
+	Edge(Node* _target, float _cost);
 };
 
 struct Node
 {
 	Vector2 position;
-	std::vector<Edge> connections;
+	vector<Edge> connections;
+	Color color;
 
 	float gScore;
-	Node* previous = nullptr;
 
 public:
-	Node() {}
-	Node(float x, float y) { position = { x, y }; }
+	Node(Vector2 pos, float cost);
 
+	void SetColor(Color _color);
+	
 	void ConnectTo(Node* other, float cost);
 };
 
 class NodeMap
 {
 public:
-	int m_width, m_height;
 	float m_cellSize;
 
-	Node** m_nodes;
+	vector<Node*> m_nodes;
 
 public:
-	Node* GetNode(int x, int y) { return m_nodes[x + m_width * y]; }
-
-	Node* GetClosestNode(Vector2 worldPos);
-
-	Node* GetRandomNode();
-
-	float GetCellSize();
-
-	std::vector<Node*> DijkstrasSearch(Node* startNode, Node* endNode);
+	Node* GetNode(Vector2 pos);
 
 public:
-	void Initialise(vector<string> asciiMap, int cellSize);
+	void Initialise(vector<terrainData> map, float cellSize);
 
 	void Draw();
-	void DrawPath(vector<Node*> nodeMapPath, Color lineColor);
 };

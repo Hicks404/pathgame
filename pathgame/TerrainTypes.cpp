@@ -74,10 +74,34 @@ void Terrain::SetData()
 			{
 				TerrainDataMap[currentTerrain].trees = (value == "true");
 			}
+			else if (key == "red")
+			{
+				TerrainDataMap[currentTerrain].color.r = stoi(value);
+			}
+			else if (key == "green")
+			{
+				TerrainDataMap[currentTerrain].color.g = stoi(value);
+			}
+			else if (key == "blue")
+			{
+				TerrainDataMap[currentTerrain].color.b = stoi(value);
+			}
 		}
 	}
 
 	file.close();
+}
+
+terrainData Terrain::GetTD(string name)
+{
+	if (TerrainDataMap.find(name) != TerrainDataMap.end())
+	{
+		terrainData data = TerrainDataMap.find(name)->second;
+		return data;
+	}
+
+	std::cout << "GetTD failed: " << name << "\n";
+	return {};
 }
 
 void Terrain::PrintTD(string name)
@@ -87,6 +111,8 @@ void Terrain::PrintTD(string name)
 		terrainData data = TerrainDataMap.find(name)->second;
 
 		std::cout << "Name: " << data.name << "\n";
+
+		std::cout << "Color: " << data.color.r << " " << data.color.g << " " << data.color.b << "\n";
 
 		std::cout << "moveSpeed: " << data.moveSpeed << "\n";
 		std::cout << "temperature: " << data.temperature << "\n";

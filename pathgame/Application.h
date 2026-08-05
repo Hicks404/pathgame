@@ -1,7 +1,6 @@
 #pragma once
 #include <functional>
 
-#include "TerrainTypes.h"
 #include "MapGenerator.h"
 #include "Pathfinding.h"
 
@@ -23,9 +22,8 @@ private:
 
 private:
 	NodeMap nodeMap;
-	Terrain terrain;
 	MapGenerator mapGen;
-	vector<string> map;
+	vector<terrainData> map;
 
 private:
 	void BeginPlay();
