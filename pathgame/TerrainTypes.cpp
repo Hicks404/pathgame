@@ -45,36 +45,36 @@ void Terrain::SetData()
 			TerrainDataMap[currentTerrain].name = currentTerrain;
 			continue;
 		}
-	}
 
-	size_t delimPos = line.find('=');
+		size_t delimPos = line.find('=');
 
-	// If '=' found then success
-	if (delimPos != string::npos && !currentTerrain.empty())
-	{
-		string key = trim(line.substr(0, delimPos));
-		string value = trim(line.substr(delimPos + 1));
+		// If '=' found then success
+		if (delimPos != string::npos && !currentTerrain.empty())
+		{
+			string key = trim(line.substr(0, delimPos));
+			string value = trim(line.substr(delimPos + 1));
 
-		// Save data
-		if (key == "moveSpeed")
-		{
-			TerrainDataMap[currentTerrain].moveSpeed = stof(value);
-		}
-		else if (key == "temperature")
-		{
-			TerrainDataMap[currentTerrain].moveSpeed = stof(value);
-		}
-		else if (key == "fertility")
-		{
-			TerrainDataMap[currentTerrain].moveSpeed = stof(value);
-		}
-		else if (key == "moveable")
-		{
-			TerrainDataMap[currentTerrain].moveSpeed = (value == "true");
-		}
-		else if (key == "trees")
-		{
-			TerrainDataMap[currentTerrain].moveSpeed = (value == "true");
+			// Save data
+			if (key == "moveSpeed")
+			{
+				TerrainDataMap[currentTerrain].moveSpeed = stof(value);
+			}
+			else if (key == "tempeture")
+			{
+				TerrainDataMap[currentTerrain].temperature = stof(value);
+			}
+			else if (key == "fertility")
+			{
+				TerrainDataMap[currentTerrain].fertility = stof(value);
+			}
+			else if (key == "moveable")
+			{
+				TerrainDataMap[currentTerrain].moveable = (value == "true");
+			}
+			else if (key == "trees")
+			{
+				TerrainDataMap[currentTerrain].trees = (value == "true");
+			}
 		}
 	}
 
@@ -87,7 +87,14 @@ void Terrain::PrintTD(string name)
 	{
 		terrainData data = TerrainDataMap.find(name)->second;
 
-		std::cout << data.name << "\n";
+		std::cout << "Name: " << data.name << "\n";
+
+		std::cout << "moveSpeed: " << data.moveSpeed << "\n";
+		std::cout << "temperature: " << data.temperature << "\n";
+		std::cout << "fertility: " << data.fertility << "\n";
+
+		std::cout << "moveable: " << data.moveable << "\n";
+		std::cout << "trees: " << data.trees << "\n\n";
 	}
 }
 
@@ -103,7 +110,7 @@ string Terrain::trim(const string& str)
 	}
 
 	// remove end spaces
-	size_t last = str.find_first_not_of(" \t\r\n");
+	size_t last = str.find_last_not_of(" \t\r\n");
 
 	return str.substr(first, (last - first + 1));
 }
