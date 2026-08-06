@@ -26,7 +26,8 @@ inline unordered_map<string, string> terrainSymbol
 	{"n", "deepOcean"},
 	{"o", "forest"},
 	{"p", "marsh"},
-	{"q", "drylands"}
+	{"q", "drylands"},
+	{"r", "jungle"}
 };
 
 class MapGenerator

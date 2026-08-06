@@ -14,11 +14,24 @@
 # o = forest
 # p = marsh
 # q = drylands
+# r = jungle
 
 [Map]
-m h h h h h h m m m m h h m m m n m m m m m i h h h h h h h m n
-m m o j h h p p m h m i m n m q n o o n h h o o o o o o o h m n
-m o m j g g c o p h o m n n n m n q o o b o o o j o o o o m n n
-n n m j e j b b o o m n n n n q m m m o a a d d d a m d b k m n
-n n m j e j
-n n m q e j
+m h h h h h h m m m m h h m 
+m m o j h h p p m h m i m n 
+m o m j g g c o p h o m n n 
+n n m j e j d b o o m n n n 
+n n m j e j d d b o m n n n 
+n n m q e j d b o c m n n n 
+n n n m e e p m m p m n n m 
+n n n m m e e m m m m n n n
+n n n n m j j r m b m n n n
+n n n n m m r m m m m n n n
+n n n m m b j r m m m n n n
+n n n m m j r r r r m m n n
+n n n n m j r r r e q m n n
+n n n n m m j q p d r m n n
+n n n n n m j q a d m m n n
+n n n n n m j q d m m n n n
+n n n n n m j d m m n n n n
+n n n n n m c m m n n n n n

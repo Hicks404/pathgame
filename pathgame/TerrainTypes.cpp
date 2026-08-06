@@ -112,7 +112,7 @@ void Terrain::PrintTD(string name)
 
 		std::cout << "Name: " << data.name << "\n";
 
-		std::cout << "Color: " << data.color.r << " " << data.color.g << " " << data.color.b << "\n";
+		std::cout << "Color: " << data.color.r << " / " << data.color.g << " / " << data.color.b << "\n";
 
 		std::cout << "moveSpeed: " << data.moveSpeed << "\n";
 		std::cout << "temperature: " << data.temperature << "\n";

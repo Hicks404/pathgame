@@ -30,6 +30,7 @@ struct Node
 
 public:
 	Node(Vector2 pos, float cost);
+	Node(Vector2 pos, float cost, Color _color);
 
 	void SetColor(Color _color);
 	

@@ -12,7 +12,7 @@ struct terrainData
 public:
 	// front details
 	string name;
-	Color color;
+	Color color = {0,0,0,255};
 
 public:
 	// modifiers
