@@ -1,6 +1,7 @@
 #include "Application.h"
 
 #include <ctime>
+#include <iostream>
 #include <raylib/raylib.h>
 
 Application::Application(int x_size, int y_size, const char* _title)
@@ -42,20 +43,27 @@ void Application::BeginPlay()
 {
 	// Create node map
 	mapGen.CreateMap();
-	nodeMap.Initialise(mapGen.GetMap(), 40);
+	nodeMap.Initialise(mapGen.GetMap(), cellSize);
 }
 
 void Application::Tick(float dt)
 {
-	
+	if (IsMouseButtonPressed(0))
+	{
+		Vector2 mousePos = GetMousePosition();
+		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode({40,40}), nodeMap.GetClosestNode(mousePos));
+
+		std::cout << nodePath.size() << "\n";
+	}
 }
 
 void Application::Render()
 {
 	nodeMap.Draw();
+	nodeMap.DrawPath(nodePath);
 }
 
 void Application::EndPlay()
 {
-	
+	nodeMap.End();
 }

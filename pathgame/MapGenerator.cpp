@@ -64,6 +64,8 @@ void MapGenerator::CreateMap()
 			continue;
 		}
 	}
+
+	file.close();
 }
 
 vector<terrainData> MapGenerator::GetMap()

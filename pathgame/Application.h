@@ -20,10 +20,14 @@ private:
 	int ySize;
 	const char* title;
 
+	float cellSize = 40;
+
 private:
 	NodeMap nodeMap;
 	MapGenerator mapGen;
 	vector<terrainData> map;
+
+	vector<Node*> nodePath;
 
 private:
 	void BeginPlay();
