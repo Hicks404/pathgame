@@ -66,6 +66,10 @@ void Terrain::SetData()
 			{
 				TerrainDataMap[currentTerrain].fertility = stof(value);
 			}
+			else if (key == "terrainCost")
+			{
+				TerrainDataMap[currentTerrain].terrainCost = stof(value);
+			}
 			else if (key == "moveable")
 			{
 				TerrainDataMap[currentTerrain].moveable = (value == "true");

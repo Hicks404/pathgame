@@ -5,7 +5,7 @@
 #include <raylib/raylib.h>
 
 Application::Application(int x_size, int y_size, const char* _title)
-	: xSize{ x_size }, ySize{ y_size }, title{ _title }
+	: xSize{ x_size }, ySize{ y_size }, title{ _title }, startMos{40,40}, endMos{40,40}
 {
 	
 }
@@ -50,10 +50,14 @@ void Application::Tick(float dt)
 {
 	if (IsMouseButtonPressed(0))
 	{
-		Vector2 mousePos = GetMousePosition();
-		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode({40,40}), nodeMap.GetClosestNode(mousePos));
-
-		std::cout << nodePath.size() << "\n";
+		startMos = GetMousePosition();
+		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(startMos), nodeMap.GetClosestNode(endMos));
+	}
+	
+	if (IsMouseButtonPressed(1))
+	{
+		endMos = GetMousePosition();
+		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(startMos), nodeMap.GetClosestNode(endMos));
 	}
 }
 

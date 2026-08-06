@@ -20,7 +20,7 @@ private:
 	int ySize;
 	const char* title;
 
-	float cellSize = 40;
+	float cellSize = 36;
 
 private:
 	NodeMap nodeMap;
@@ -28,6 +28,10 @@ private:
 	vector<terrainData> map;
 
 	vector<Node*> nodePath;
+
+private:
+	Vector2 startMos;
+	Vector2 endMos;
 
 private:
 	void BeginPlay();

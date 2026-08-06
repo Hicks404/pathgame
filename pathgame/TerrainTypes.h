@@ -19,6 +19,7 @@ public:
 	float moveSpeed;
 	float temperature;
 	float fertility;
+	float terrainCost;
 
 public:
 	// sets

@@ -45,10 +45,8 @@ Node* NodeMap::GetNode(Vector2 pos)
 Node* NodeMap::GetClosestNode(Vector2 pos)
 {
 	float i = MakeDivisible(pos.x, m_cellSize);
-	if (i < 0 || i >= GetScreenWidth()) { return nullptr; };
 
 	float j = MakeDivisible(pos.y, m_cellSize);
-	if (j < 0 || j >= GetScreenHeight()) { return nullptr; };
 
 	return GetNode({i, j});
 }
@@ -56,6 +54,11 @@ Node* NodeMap::GetClosestNode(Vector2 pos)
 int NodeMap::MakeDivisible(int num, int div)
 {
 	return (num + div / 2) / div * div;
+}
+
+bool NodeMap::EqualVec(Vector2 vec1, Vector2 vec2)
+{
+	return (vec1.x == vec2.x && vec1.y == vec2.y);
 }
 
 vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
@@ -78,6 +81,8 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 	start->gScore = 0;
 	start->previous = nullptr;
 
+	float savedDist = 10000;
+
 	openList.emplace_back(start);
 
 	while (!openList.empty())
@@ -97,30 +102,34 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 		closedList.emplace_back(smallest);
 
 		// find successor
-		float best = 1000.f;
-		Node* successor;
-		for (Edge edge : smallest->connections)
+		float best = 1000000.f;
+		Node* successor = smallest;
+
+		// begin path finding
+		for (Edge edge : successor->connections)
 		{
-			if (edge.target == end)
+			if (EqualVec(edge.target->position, end->position) || best < 0)
 			{
 				successor = edge.target;
 				successor->previous = smallest;
-				break;
+				openList.clear();
 			}
 			else
 			{
 				// based on cost and distance from end
-				float score = edge.cost + (end->position.x - edge.target->position.x) + (end->position.y - edge.target->position.y);
+				float distance = sqrt(pow(edge.target->position.x - end->position.x, 2) + pow(edge.target->position.y - end->position.y, 2));
+				float score = distance * edge.cost;
 
-				if (score < best)
+				if (score < best && distance <= savedDist)
 				{
 					best = score;
+					savedDist = distance;
 					successor = edge.target;
 					successor->previous = smallest;
+					openList.emplace_back(successor);
 				}
 			}
 		}
-		openList.emplace_back(successor);
 	}
 
 	return closedList;
@@ -143,6 +152,7 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 			continue;
 		}
 
+		
 		m_nodes.emplace_back(new Node({ x * cellSize, y * cellSize }, 0.f, td));
 
 		x += 1;
@@ -160,7 +170,10 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 
 				if (nodeWest)
 				{
-					float score = 100 / node->data.moveSpeed + 100 / nodeWest->data.moveSpeed;
+					// make edge score
+					float score = node->data.terrainCost;
+					score = std::max(score, 0.f);
+
 					node->ConnectTo(nodeWest, score);
 					nodeWest->ConnectTo(node, score);
 				}
@@ -170,7 +183,8 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 
 				if (nodeSouth)
 				{
-					float score = 100 / node->data.moveSpeed + 100 / nodeWest->data.moveSpeed;
+					float score = node->data.terrainCost;
+					score = std::max(score, 0.f);
 					node->ConnectTo(nodeSouth, score);
 					nodeSouth->ConnectTo(node, score);
 				}
@@ -191,8 +205,8 @@ void NodeMap::Draw()
 		{
 			DrawLine(node->position.x, node->position.y, edge.target->position.x, edge.target->position.y, WHITE);
 
-			// const char* text = std::to_string(node->gScore).c_str();
-			// DrawText(text, edge.target->position.x - node->position.x, edge.target->position.y - node->position.y, 40, BLACK);
+			//const char* text = std::to_string(node->gScore).c_str();
+			//DrawText(text, edge.target->position.x - node->position.x, edge.target->position.y - node->position.y, 40, BLACK);
 		}
 	}
 }
@@ -205,12 +219,13 @@ void NodeMap::DrawPath(vector<Node*> nodeMapPath)
 		{
 			Node* other = nm->previous;
 
-			int xPos = other->position.x;
-			int yPos = other->position.y;
-
-			DrawLine((nm->position.x + 0.5f), (nm->position.y + 0.5f),
-				xPos, yPos,
-				GRAY);
+			float xPos = other->position.x;
+			float yPos = other->position.y;
+			
+			DrawLineEx({ nm->position.x + 0.5f, nm->position.y + 0.5f },
+				{ xPos, yPos },
+				8,
+				BLACK);
 		}
 	}
 }

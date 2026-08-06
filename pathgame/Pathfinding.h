@@ -8,6 +8,8 @@
 
 using std::vector;
 using std::string;
+using std::pow;
+using std::sqrt;
 
 struct Node;
 
@@ -49,6 +51,8 @@ public:
 	Node* GetClosestNode(Vector2 pos);
 
 	int MakeDivisible(int num, int div);
+
+	bool EqualVec(Vector2 vec1, Vector2 vec2);
 
 	vector<Node*> PathSearch(Node* start, Node* end);
 

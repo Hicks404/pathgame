@@ -17,22 +17,24 @@
 # r = jungle
 
 [Map]
-m h h h h h h m m m m h h m 
-m m o j h h p p m h m i m n 
-m o m j g g c o p h o m n n 
-n n m j e j d b o o m n n n 
-n n m j e j d d b o m n n n 
-n n m q e j d b o c m n n n 
-n n n m e e p m m p m n n m 
-n n n m m e e m m m m n n n
-n n n n m j j r m b m n n n
-n n n n m m r m m m m n n n
-n n n m m b j r m m m n n n
-n n n m m j r r r r m m n n
-n n n n m j r r r e q m n n
-n n n n m m j q p d r m n n
-n n n n n m j q a d m m n n
-n n n n n m j q d m m n n n
-n n n n n m j d m m n n n n
-n n n n n m c m m n n n n n
-n n n n n m m m n n n n n n
+m h h h h h h m m m m h h m m n n m m o h h h h h h h h h h h h h m	n n n
+m m o j h h p p m h m i m m m m m m o o o o j o o o o o o o o h m m	n n n
+m o m j g g c o p h o m n n m a m r r r d d d r j d d d o o o j m n	n n n
+n n m j e j d b o o m n n m m m a r r d d e e d j e e d b b j m m n	n n n
+n n m j e j d d b o m n n m m b b a b b b j m e e e j a a m b m n n	n n n
+n n m q e j d b o c m n n m b r r j r r m j m e q q j a a m m m b n	n n n
+n n n m e e p m m p m n n m b b m b m j b b j e j d a a a a m b m n	n n n
+n n n m m e e m m m m n n m m m m m m m q e a j e j a a a a m m m n	n n n
+n n n n m j j r m b m n n m m q q q q e q e e a a j j p a m m n n n	n n n
+n n n n m m r m m m m n n m e e e e e e q e e a r r j r r m n n n n	n n n
+n n n m m b j r m m m n n m m c c e e e d m m a r r m r m m m n n n	n n n
+n n n m m j r r r r m m n n m c c c c c c j m m r m m r m m p m n n	n n n
+n n n n m j r r r e q m n n m m r r r c c m m m m m m m b r m m n n	n n n
+n n n n m m j q p d r m n n n m b r r c m m n n n n m m m m m m m n	n n n
+n n n n n m j q a d m m n n n m c c c c m m n n n n m m m e m r m m	n n n
+n n n n n m j q d m m n n n n m c c c r m n n n n n m e e e e e c m	n n n
+n n n n n m j d m m n n n n n m b a r m m n n n n n m m r e e e a m	n n n
+n n n n n m c m m n n n n n n m m m m m n n n n n n n m m m m a a m	m n n
+n n n n n m m m n n n n n n n n n n n n n n n n n n n n n n m m m m a m n
+n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n m m n n
+n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n
