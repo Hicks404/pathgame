@@ -73,7 +73,7 @@ blue = 200
 moveSpeed = 1
 tempeture = 35
 fertility = 0.4
-terrainCost = 0.9
+terrainCost = 1
 moveable = true
 trees = false
 
@@ -84,7 +84,7 @@ blue = 170
 moveSpeed = 1
 tempeture = 43
 fertility = 0.2
-terrainCost = 1.1
+terrainCost = 1
 moveable = true
 trees = false
 
@@ -95,7 +95,7 @@ blue = 214
 moveSpeed = 1
 tempeture = 40
 fertility = 1.3
-terrainCost = 1.5
+terrainCost = 1
 moveable = true
 trees = false
 
@@ -106,7 +106,7 @@ blue = 180
 moveSpeed = 1
 tempeture = 12
 fertility = 0.5
-terrainCost = 1.7
+terrainCost = 1
 moveable = true
 trees = true
 
@@ -139,7 +139,7 @@ blue = 98
 moveSpeed = 1
 tempeture = 15
 fertility = 0
-terrainCost = 10
+terrainCost = 20
 moveable = false
 trees = false
 
@@ -150,7 +150,7 @@ blue = 50
 moveSpeed = 0.6
 tempeture = 22
 fertility = 1
-terrainCost = 2
+terrainCost = 1.4
 moveable = true
 trees = true
 
@@ -161,7 +161,7 @@ blue = 118
 moveSpeed = 0.35
 tempeture = 24
 fertility = 1.2
-terrainCost = 3
+terrainCost = 2
 moveable = true
 trees = true
 
@@ -172,7 +172,7 @@ blue = 130
 moveSpeed = 1
 tempeture = 43
 fertility = 0.4
-terrainCost = 1.1
+terrainCost = 1
 moveable = true
 trees = false
 
@@ -183,6 +183,6 @@ blue = 105
 moveSpeed = 0.4
 tempeture = 30
 fertility = 1.3
-terrainCost = 2.1
+terrainCost = 1.4
 moveable = true
 trees = false

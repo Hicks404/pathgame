@@ -108,31 +108,47 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 		// begin path finding
 		for (Edge edge : successor->connections)
 		{
-			if (EqualVec(edge.target->position, end->position) || best < 0)
+			if (std::ranges::find(closedList, edge.target) == closedList.end())
 			{
-				successor = edge.target;
-				successor->previous = smallest;
-				openList.clear();
-			}
-			else
-			{
-				// based on cost and distance from end
-				float distance = sqrt(pow(edge.target->position.x - end->position.x, 2) + pow(edge.target->position.y - end->position.y, 2));
-				float score = distance * edge.cost;
-
-				if (score < best && distance <= savedDist)
+				if (EqualVec(edge.target->position, end->position) || best < 0)
 				{
-					best = score;
-					savedDist = distance;
 					successor = edge.target;
 					successor->previous = smallest;
-					openList.emplace_back(successor);
+					openList.clear();
+
+					std::cout << best << "\n";
+				}
+				else
+				{
+					// based on cost and distance from end
+					float distance = sqrt(pow(edge.target->position.x - end->position.x, 2) + pow(edge.target->position.y - end->position.y, 2)) / m_cellSize;
+					float score = distance * edge.cost;
+
+					if (score < best) // && distance <= savedDist )
+					{
+						best = score;
+						savedDist = distance;
+						successor = edge.target;
+						successor->previous = smallest;
+						openList.emplace_back(successor);
+					}
 				}
 			}
 		}
 	}
 
-	return closedList;
+	// create path vector in reverse
+	vector<Node*> Path;
+	Node* currentNode = end;
+
+	while (currentNode != nullptr)
+	{
+		Path.emplace_back(currentNode);
+
+		currentNode = currentNode->previous;
+	}
+
+	return Path;
 }
 
 void NodeMap::Initialise(vector<terrainData> map, float cellSize)
