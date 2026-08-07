@@ -70,9 +70,9 @@ void Terrain::SetData()
 			{
 				TerrainDataMap[currentTerrain].terrainCost = stof(value);
 			}
-			else if (key == "moveable")
+			else if (key == "water")
 			{
-				TerrainDataMap[currentTerrain].moveable = (value == "true");
+				TerrainDataMap[currentTerrain].water = (value == "true");
 			}
 			else if (key == "trees")
 			{
@@ -122,7 +122,7 @@ void Terrain::PrintTD(string name)
 		std::cout << "temperature: " << data.temperature << "\n";
 		std::cout << "fertility: " << data.fertility << "\n";
 
-		std::cout << "moveable: " << data.moveable << "\n";
+		std::cout << "water: " << data.water << "\n";
 		std::cout << "trees: " << data.trees << "\n\n";
 	}
 }

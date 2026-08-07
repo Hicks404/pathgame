@@ -23,7 +23,7 @@ public:
 
 public:
 	// sets
-	bool moveable;
+	bool water;
 	bool trees;
 };
 

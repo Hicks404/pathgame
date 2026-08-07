@@ -5,6 +5,7 @@
 #include <raylib/raylib.h>
 
 #include "TerrainTypes.h"
+#include "MapMode.h"
 
 using std::vector;
 using std::string;
@@ -17,9 +18,11 @@ struct Edge
 {
 	Node* target;
 	float cost;
+	bool water;
 
 public:
 	Edge(Node* _target, float _cost);
+	Edge(Node* _target, float _cost, bool _water);
 };
 
 struct Node
@@ -35,7 +38,7 @@ public:
 	Node(Vector2 pos, float cost);
 	Node(Vector2 pos, float cost, terrainData _data);
 	
-	void ConnectTo(Node* other, float cost);
+	void ConnectTo(Node* other, float cost, bool water);
 };
 
 class NodeMap

@@ -8,7 +8,7 @@ moveSpeed = 0
 tempeture = 0
 fertility = 0
 terrainCost = 100
-moveable = false
+water = true
 trees = false
 
 [ocean]
@@ -18,8 +18,8 @@ blue = 255
 moveSpeed = 0
 tempeture = 18
 fertility = 0
-terrainCost = 70
-moveable = false
+terrainCost = 80
+water = true
 trees = false
 
 [shore]
@@ -29,8 +29,8 @@ blue = 239
 moveSpeed = 0.7
 tempeture = 19
 fertility = 0
-terrainCost = 10
-moveable = false
+terrainCost = 60
+water = true
 trees = false
 
 [plains]
@@ -41,7 +41,7 @@ moveSpeed = 1
 tempeture = 25
 fertility = 1
 terrainCost = 1
-moveable = true
+water = false
 trees = true
 
 [grasslands]
@@ -52,7 +52,7 @@ moveSpeed = 1
 tempeture = 28
 fertility = 1
 terrainCost = 1
-moveable = true
+water = false
 trees = true
 
 [savannah]
@@ -63,7 +63,7 @@ moveSpeed = 1
 tempeture = 30
 fertility = 0.5
 terrainCost = 1
-moveable = true
+water = false
 trees = true
 
 [steppe]
@@ -74,7 +74,7 @@ moveSpeed = 1
 tempeture = 35
 fertility = 0.4
 terrainCost = 1
-moveable = true
+water = false
 trees = false
 
 [desert]
@@ -85,7 +85,7 @@ moveSpeed = 1
 tempeture = 43
 fertility = 0.2
 terrainCost = 1
-moveable = true
+water = false
 trees = false
 
 [desertFlood]
@@ -96,7 +96,7 @@ moveSpeed = 1
 tempeture = 40
 fertility = 1.3
 terrainCost = 1
-moveable = true
+water = false
 trees = false
 
 [tundra]
@@ -107,7 +107,7 @@ moveSpeed = 1
 tempeture = 12
 fertility = 0.5
 terrainCost = 1
-moveable = true
+water = false
 trees = true
 
 [polar]
@@ -118,7 +118,7 @@ moveSpeed = 1
 tempeture = 6
 fertility = 0
 terrainCost = 2
-moveable = true
+water = false
 trees = false
 
 [seaIce]
@@ -129,7 +129,7 @@ moveSpeed = 1
 tempeture = -5
 fertility = 0
 terrainCost = 4
-moveable = true
+water = false
 trees = false
 
 [mountains]
@@ -139,8 +139,8 @@ blue = 98
 moveSpeed = 1
 tempeture = 15
 fertility = 0
-terrainCost = 20
-moveable = false
+terrainCost = 4
+water = false
 trees = false
 
 [forest]
@@ -151,7 +151,7 @@ moveSpeed = 0.6
 tempeture = 22
 fertility = 1
 terrainCost = 1.4
-moveable = true
+water = false
 trees = true
 
 [marsh]
@@ -162,7 +162,7 @@ moveSpeed = 0.35
 tempeture = 24
 fertility = 1.2
 terrainCost = 2
-moveable = true
+water = false
 trees = true
 
 [drylands]
@@ -173,7 +173,7 @@ moveSpeed = 1
 tempeture = 43
 fertility = 0.4
 terrainCost = 1
-moveable = true
+water = false
 trees = false
 
 [jungle]
@@ -184,5 +184,5 @@ moveSpeed = 0.4
 tempeture = 30
 fertility = 1.3
 terrainCost = 1.4
-moveable = true
+water = false
 trees = false

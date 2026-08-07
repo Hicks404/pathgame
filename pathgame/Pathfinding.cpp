@@ -3,11 +3,20 @@
 #include <algorithm>
 #include <iostream>
 #include <raylib/raylib.h>
+#include <raylib/raymath.h>
 
 Edge::Edge(Node* _target, float _cost)
 {
 	target = _target;
 	cost = _cost;
+	water = false;
+}
+
+Edge::Edge(Node* _target, float _cost, bool _water)
+{
+	target = _target;
+	cost = _cost;
+	water = _water;
 }
 
 Node::Node(Vector2 pos, float cost)
@@ -23,9 +32,9 @@ Node::Node(Vector2 pos, float cost, terrainData _data)
 	data = _data;
 }
 
-void Node::ConnectTo(Node* other, float cost)
+void Node::ConnectTo(Node* other, float cost, bool water)
 {
-	connections.emplace_back(other, cost);
+	connections.emplace_back(other, cost, water);
 }
 
 Node* NodeMap::GetNode(Vector2 pos)
@@ -85,6 +94,7 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 
 	openList.emplace_back(start);
 
+	// loop until path is found
 	while (!openList.empty())
 	{
 		// Get smallest node gScore
@@ -103,37 +113,42 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 
 		// find successor
 		float best = 1000000.f;
-		Node* successor = smallest;
+
+		// true if found an edge
+		bool foundWay = false;
 
 		// begin path finding
-		for (Edge edge : successor->connections)
+		for (Edge edge : smallest->connections)
 		{
 			if (std::ranges::find(closedList, edge.target) == closedList.end())
 			{
 				if (EqualVec(edge.target->position, end->position) || best < 0)
 				{
-					successor = edge.target;
-					successor->previous = smallest;
+					edge.target->previous = smallest;
 					openList.clear();
-
-					std::cout << best << "\n";
+					foundWay = true;
 				}
 				else
 				{
 					// based on cost and distance from end
-					float distance = sqrt(pow(edge.target->position.x - end->position.x, 2) + pow(edge.target->position.y - end->position.y, 2)) / m_cellSize;
+					float distance = Vector2Distance(edge.target->position, end->position) / m_cellSize;
 					float score = distance * edge.cost;
 
-					if (score < best) // && distance <= savedDist )
+					if (score < best)
 					{
 						best = score;
 						savedDist = distance;
-						successor = edge.target;
-						successor->previous = smallest;
-						openList.emplace_back(successor);
+						edge.target->previous = smallest;
+						openList.emplace_back(edge.target);
+						foundWay = true;
 					}
 				}
 			}
+		}
+
+		if (!foundWay)
+		{
+			return {};
 		}
 	}
 
@@ -181,17 +196,20 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 		{
 			if (node->position.x > 0 && node->position.y > 0)
 			{
+				// make edge score
+				float score = node->data.terrainCost;
+				score = std::max(score, 0.f);
+
+				// water bool
+				bool water = node->data.water;
+
 				// check if node west
 				Node* nodeWest = GetNode({ node->position.x - 1 * m_cellSize, node->position.y });
 
 				if (nodeWest)
 				{
-					// make edge score
-					float score = node->data.terrainCost;
-					score = std::max(score, 0.f);
-
-					node->ConnectTo(nodeWest, score);
-					nodeWest->ConnectTo(node, score);
+					node->ConnectTo(nodeWest, score, water);
+					nodeWest->ConnectTo(node, score, water);
 				}
 
 				// check if node south
@@ -199,10 +217,8 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 
 				if (nodeSouth)
 				{
-					float score = node->data.terrainCost;
-					score = std::max(score, 0.f);
-					node->ConnectTo(nodeSouth, score);
-					nodeSouth->ConnectTo(node, score);
+					node->ConnectTo(nodeSouth, score, water);
+					nodeSouth->ConnectTo(node, score, water);
 				}
 			}
 		}
