@@ -44,6 +44,8 @@ void Application::BeginPlay()
 	// Create node map
 	mapGen.CreateMap();
 	nodeMap.Initialise(mapGen.GetMap(), cellSize);
+
+	mapMode.Init(xSize, ySize, cellSize);
 }
 
 void Application::Tick(float dt)
@@ -59,12 +61,16 @@ void Application::Tick(float dt)
 		endMos = GetMousePosition();
 		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(startMos), nodeMap.GetClosestNode(endMos));
 	}
+
+	mapMode.Tick(dt);
 }
 
 void Application::Render()
 {
 	nodeMap.Draw();
 	nodeMap.DrawPath(nodePath);
+
+	mapMode.Render();
 }
 
 void Application::EndPlay()

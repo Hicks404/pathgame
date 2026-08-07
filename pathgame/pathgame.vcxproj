@@ -181,7 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Political.png" />
-    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Tempeture.png" />
+    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Temperature.png" />
     <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Terrain.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

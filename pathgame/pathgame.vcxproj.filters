@@ -68,7 +68,7 @@
     <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Political.png">
       <Filter>Resource Files</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Tempeture.png">
+    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Temperature.png">
       <Filter>Resource Files</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Terrain.png">

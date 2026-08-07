@@ -48,6 +48,8 @@ public:
 
 	vector<Node*> m_nodes;
 
+	MapModeEnum mode = Political;
+
 public:
 	Node* GetNode(Vector2 pos);
 

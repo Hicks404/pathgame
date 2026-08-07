@@ -3,6 +3,7 @@
 
 #include "MapGenerator.h"
 #include "Pathfinding.h"
+#include "MapMode.h"
 
 using std::function;
 
@@ -25,6 +26,8 @@ private:
 private:
 	NodeMap nodeMap;
 	MapGenerator mapGen;
+	MapMode mapMode;
+
 	vector<terrainData> map;
 
 	vector<Node*> nodePath;
