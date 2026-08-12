@@ -5,7 +5,7 @@
 #include <raylib/raylib.h>
 
 Application::Application(int x_size, int y_size, const char* _title)
-	: xSize{ x_size }, ySize{ y_size }, title{ _title }, startMos{40,40}, endMos{40,40}
+	: xSize{ x_size }, ySize{ y_size }, title{ _title }
 {
 	
 }
@@ -46,23 +46,30 @@ void Application::BeginPlay()
 	nodeMap.Initialise(mapGen.GetMap(), cellSize);
 
 	mapMode.Init(xSize, ySize, cellSize);
+
+	selectedAgent = new Agent();
+	m_agents.emplace_back(selectedAgent);
+	selectedAgent->SetNodeMap(nodeMap);
+	selectedAgent->SetNode(nodeMap.GetClosestNode({ 200,200 }));
+	selectedAgent->SetSpeed(20);
 }
 
 void Application::Tick(float dt)
 {
 	if (IsMouseButtonPressed(0))
 	{
-		startMos = GetMousePosition();
-		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(startMos), nodeMap.GetClosestNode(endMos));
-	}
-	
-	if (IsMouseButtonPressed(1))
-	{
-		endMos = GetMousePosition();
-		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(startMos), nodeMap.GetClosestNode(endMos));
+		Vector2 mos = GetMousePosition();
+		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(selectedAgent->GetPosition()), nodeMap.GetClosestNode(mos));
+
+		selectedAgent->GoToNode(nodeMap.GetClosestNode(mos));
 	}
 
 	mapMode.Tick(dt);
+
+	for (Agent* agent : m_agents)
+	{
+		agent->Update(dt);
+	}
 }
 
 void Application::Render()
@@ -71,9 +78,20 @@ void Application::Render()
 	nodeMap.DrawPath(nodePath);
 
 	mapMode.Render();
+
+	for (Agent* agent : m_agents)
+	{
+		agent->Draw();
+	}
 }
 
 void Application::EndPlay()
 {
 	nodeMap.End();
+
+	for (Agent* agent : m_agents)
+	{
+		delete agent;
+		agent = nullptr;
+	}
 }

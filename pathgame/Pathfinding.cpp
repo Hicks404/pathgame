@@ -208,7 +208,7 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 				if (nodeWest)
 				{
 					// minimum score
-					float score = std::min(node->data.terrainCost, nodeWest->data.terrainCost);
+					float score = std::max(node->data.terrainCost, nodeWest->data.terrainCost);
 
 					node->ConnectTo(nodeWest, score, water);
 					nodeWest->ConnectTo(node, score, water);
@@ -219,7 +219,7 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 
 				if (nodeSouth)
 				{
-					float score = std::min(node->data.terrainCost, nodeSouth->data.terrainCost);
+					float score = std::max(node->data.terrainCost, nodeSouth->data.terrainCost);
 
 					node->ConnectTo(nodeSouth, score, water);
 					nodeSouth->ConnectTo(node, score, water);

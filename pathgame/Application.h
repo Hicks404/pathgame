@@ -4,6 +4,7 @@
 #include "MapGenerator.h"
 #include "Pathfinding.h"
 #include "MapMode.h"
+#include "Agent.h"
 
 using std::function;
 
@@ -32,9 +33,8 @@ private:
 
 	vector<Node*> nodePath;
 
-private:
-	Vector2 startMos;
-	Vector2 endMos;
+	vector<Agent*> m_agents;
+	Agent* selectedAgent;
 
 private:
 	void BeginPlay();

@@ -83,6 +83,6 @@ void MapMode::Render()
 		}
 
 		DrawRectangleV(data.position, data.size, col);
-		DrawTextureEx(data.icon, data.position, 0.f, 0.f, WHITE);
+		DrawTextureEx(data.icon, data.position, 0.f, 1.f, WHITE);
 	}
 }
