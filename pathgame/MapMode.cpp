@@ -23,7 +23,8 @@ MapModeEnum MapMode::GetMapMode()
 
 Texture2D MapMode::GetIcon(MapModeEnum _mode)
 {
-	return LoadTexture(("resources/" + MapIcons[_mode] + ".png").c_str());
+	TraceLog(LOG_INFO, "Working directory: %s", GetWorkingDirectory());
+	return LoadTexture((MapIcons[_mode] + ".png").c_str());
 }
 
 void MapMode::ChangeMapMode(MapModeEnum newMode)
@@ -83,6 +84,6 @@ void MapMode::Render()
 		}
 
 		DrawRectangleV(data.position, data.size, col);
-		DrawTextureEx(data.icon, data.position, 0.f, 1.f, WHITE);
+		DrawTextureEx(data.icon, data.position, 0.f, height/5538.7, WHITE);
 	}
 }

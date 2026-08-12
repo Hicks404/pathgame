@@ -70,6 +70,11 @@ bool NodeMap::EqualVec(Vector2 vec1, Vector2 vec2)
 	return (vec1.x == vec2.x && vec1.y == vec2.y);
 }
 
+void NodeMap::SetMapMode(MapModeEnum set)
+{
+	mode = set;
+}
+
 vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 {
 	// Validate input
@@ -134,7 +139,21 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 					// based on cost and distance from end
 					// distance is hScore
 					float distance = Vector2Distance(edge.target->position, end->position) / m_cellSize;
+
+					// gscore using total score and terrain cost
 					float gScore = firstG->gScore + edge.cost;
+
+					//// continue water travel if already in water. Hesitant to begin water travel
+					//if (edge.water && waterMode)
+					//{
+					//	gScore = 0;
+					//}
+					//else if (edge.water && !waterMode)
+					//{
+					//	gScore *= 2;
+					//}
+
+					// final cost
 					float fScore = distance + gScore;
 
 					// add best node to reach destination
@@ -144,6 +163,7 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 						edge.target->previous = firstG;
 						openList.emplace_back(edge.target);
 						foundWay = true;
+						waterMode = edge.water;
 					}
 				}
 			}
@@ -172,6 +192,8 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 {
 	m_cellSize = cellSize;
+
+	waterMode = false;
 
 	float x = 0.f;
 	float y = 0.f;
@@ -233,8 +255,21 @@ void NodeMap::Draw()
 {
 	for (Node* node : m_nodes)
 	{
+		// Decide tile color
+		Color tileCol = node->data.color;
+
+		if (mode == Temperature)
+		{
+			tileCol = { 
+				static_cast<unsigned char>(std::max(node->data.temperature * 5, 0.f)), 
+				0, 
+				static_cast<unsigned char>(std::max(155 - node->data.temperature * 5, 0.f)),
+				255 
+			};
+		}
+
 		// Draw tile
-		DrawRectangle(node->position.x - m_cellSize/2, node->position.y - m_cellSize / 2, m_cellSize, m_cellSize, node->data.color);
+		DrawRectangle(node->position.x - m_cellSize/2, node->position.y - m_cellSize / 2, m_cellSize, m_cellSize, tileCol);
 
 		// Draw line
 		for (Edge edge : node->connections)

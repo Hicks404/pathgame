@@ -56,8 +56,12 @@ void Application::BeginPlay()
 
 void Application::Tick(float dt)
 {
+	// Set map mode
+	nodeMap.SetMapMode(mapMode.GetMapMode());
+
 	if (IsMouseButtonPressed(0))
 	{
+		// Make path
 		Vector2 mos = GetMousePosition();
 		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(selectedAgent->GetPosition()), nodeMap.GetClosestNode(mos));
 

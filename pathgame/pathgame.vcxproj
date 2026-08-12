@@ -182,9 +182,9 @@
     <Text Include="WorldMap.txt" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Political.png" />
-    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Temperature.png" />
-    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Terrain.png" />
+    <CopyFileToFolders Include="Political.png" />
+    <CopyFileToFolders Include="Temperature.png" />
+    <CopyFileToFolders Include="Terrain.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

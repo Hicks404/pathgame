@@ -50,6 +50,9 @@ public:
 
 	MapModeEnum mode = Political;
 
+private:
+	bool waterMode;
+
 public:
 	Node* GetNode(Vector2 pos);
 
@@ -58,6 +61,8 @@ public:
 	int MakeDivisible(int num, int div);
 
 	bool EqualVec(Vector2 vec1, Vector2 vec2);
+
+	void SetMapMode(MapModeEnum set);
 
 	vector<Node*> PathSearch(Node* start, Node* end);
 

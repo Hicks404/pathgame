@@ -71,13 +71,13 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Political.png">
+    <CopyFileToFolders Include="Political.png">
       <Filter>Resource Files</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Temperature.png">
+    <CopyFileToFolders Include="Temperature.png">
       <Filter>Resource Files</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\..\..\..\Downloads\Icons\Terrain.png">
+    <CopyFileToFolders Include="Terrain.png">
       <Filter>Resource Files</Filter>
     </CopyFileToFolders>
   </ItemGroup>
