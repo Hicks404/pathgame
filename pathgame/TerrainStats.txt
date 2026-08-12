@@ -7,7 +7,7 @@ blue = 180
 moveSpeed = 0
 tempeture = 0
 fertility = 0
-terrainCost = 100
+terrainCost = 2
 water = true
 trees = false
 
@@ -18,7 +18,7 @@ blue = 255
 moveSpeed = 0
 tempeture = 18
 fertility = 0
-terrainCost = 80
+terrainCost = 1.2
 water = true
 trees = false
 
@@ -29,7 +29,7 @@ blue = 239
 moveSpeed = 0.7
 tempeture = 19
 fertility = 0
-terrainCost = 60
+terrainCost = 1.1
 water = true
 trees = false
 
@@ -84,7 +84,7 @@ blue = 170
 moveSpeed = 1
 tempeture = 43
 fertility = 0.2
-terrainCost = 1
+terrainCost = 1.1
 water = false
 trees = false
 

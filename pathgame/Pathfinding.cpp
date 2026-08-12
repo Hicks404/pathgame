@@ -90,26 +90,25 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 	start->gScore = 0;
 	start->previous = nullptr;
 
-	float savedDist = 10000;
-
 	openList.emplace_back(start);
 
 	// loop until path is found
 	while (!openList.empty())
 	{
-		// Get smallest node gScore
-		std::sort(openList.begin(), openList.end(), [](const Node* a, const Node* b)
-			{
-				return a->gScore > b->gScore;
-			});
+		// get gNode
+		Node* firstG = openList.back();
+		firstG->gScore = 0;
 
-		Node* smallest = openList.back();
-
-		// remove smallest
+		// remove firstG from openList
 		openList.pop_back();
 
+		for (Node* node : openList)
+		{
+			node->gScore = 10000;
+		}
+
 		// add to closed list
-		closedList.emplace_back(smallest);
+		closedList.emplace_back(firstG);
 
 		// find successor
 		float best = 1000000.f;
@@ -118,27 +117,31 @@ vector<Node*> NodeMap::PathSearch(Node* start, Node* end)
 		bool foundWay = false;
 
 		// begin path finding
-		for (Edge edge : smallest->connections)
+		for (Edge edge : firstG->connections)
 		{
 			if (std::ranges::find(closedList, edge.target) == closedList.end())
 			{
+				// When reached destination
 				if (EqualVec(edge.target->position, end->position) || best < 0)
 				{
-					edge.target->previous = smallest;
+					firstG->gScore += best;
+					edge.target->previous = firstG;
 					openList.clear();
 					foundWay = true;
 				}
 				else
 				{
 					// based on cost and distance from end
+					// distance is hScore
 					float distance = Vector2Distance(edge.target->position, end->position) / m_cellSize;
-					float score = distance * edge.cost;
+					float gScore = firstG->gScore + edge.cost;
+					float fScore = distance + gScore;
 
-					if (score < best)
+					// add best node to reach destination
+					if (fScore < best)
 					{
-						best = score;
-						savedDist = distance;
-						edge.target->previous = smallest;
+						best = fScore;
+						edge.target->previous = firstG;
 						openList.emplace_back(edge.target);
 						foundWay = true;
 					}
@@ -196,10 +199,6 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 		{
 			if (node->position.x > 0 && node->position.y > 0)
 			{
-				// make edge score
-				float score = node->data.terrainCost;
-				score = std::max(score, 0.f);
-
 				// water bool
 				bool water = node->data.water;
 
@@ -208,6 +207,9 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 
 				if (nodeWest)
 				{
+					// minimum score
+					float score = std::min(node->data.terrainCost, nodeWest->data.terrainCost);
+
 					node->ConnectTo(nodeWest, score, water);
 					nodeWest->ConnectTo(node, score, water);
 				}
@@ -217,6 +219,8 @@ void NodeMap::Initialise(vector<terrainData> map, float cellSize)
 
 				if (nodeSouth)
 				{
+					float score = std::min(node->data.terrainCost, nodeSouth->data.terrainCost);
+
 					node->ConnectTo(nodeSouth, score, water);
 					nodeSouth->ConnectTo(node, score, water);
 				}
@@ -236,9 +240,6 @@ void NodeMap::Draw()
 		for (Edge edge : node->connections)
 		{
 			DrawLine(node->position.x, node->position.y, edge.target->position.x, edge.target->position.y, WHITE);
-
-			//const char* text = std::to_string(node->gScore).c_str();
-			//DrawText(text, edge.target->position.x - node->position.x, edge.target->position.y - node->position.y, 40, BLACK);
 		}
 	}
 }

@@ -14,7 +14,7 @@ using std::vector;
 enum MapModeEnum
 {
 	Political,
-	Terrain,
+	Terra,
 	Temperature,
 	End
 };
@@ -22,7 +22,7 @@ enum MapModeEnum
 inline unordered_map<MapModeEnum, string> MapIcons
 {
 	{Political, "Political"},
-	{Terrain, "Terrain"},
+	{Terra, "Terrain"},
 	{Temperature, "Temperature" }
 };
 
