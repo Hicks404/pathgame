@@ -58,6 +58,8 @@ namespace PathGame
 	public:
 		Node* GetNode(Vector2 pos);
 
+		Node* GetNodeFG(int x, int y);
+
 		Node* GetClosestNode(Vector2 pos);
 
 		int MakeDivisible(int num, int div);

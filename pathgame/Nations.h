@@ -35,5 +35,10 @@ namespace PathGame
 		float income;
 
 		int manpower;
+
+	public:
+		void landTag();
+
+		void Update();
 	};
 }

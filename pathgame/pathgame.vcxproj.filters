@@ -42,6 +42,9 @@
     <ClCompile Include="Nations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -65,6 +68,9 @@
     <ClInclude Include="Nations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NationData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="TerrainStats.txt">
@@ -73,6 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="WorldMap.txt">
+      <Filter>Data</Filter>
+    </Text>
+    <Text Include="Nations.txt">
       <Filter>Data</Filter>
     </Text>
   </ItemGroup>

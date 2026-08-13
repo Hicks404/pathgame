@@ -164,6 +164,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGenerator.cpp" />
     <ClCompile Include="MapMode.cpp" />
+    <ClCompile Include="NationData.cpp" />
     <ClCompile Include="Nations.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="TerrainTypes.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="MapGenerator.h" />
     <ClInclude Include="MapMode.h" />
+    <ClInclude Include="NationData.h" />
     <ClInclude Include="Nations.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="TerrainTypes.h" />
@@ -181,6 +183,7 @@
     <None Include="TerrainStats.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Nations.txt" />
     <Text Include="WorldMap.txt" />
   </ItemGroup>
   <ItemGroup>

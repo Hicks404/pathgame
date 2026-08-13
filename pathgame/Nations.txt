@@ -1,0 +1,8 @@
+# nations
+
+[Rebels]
+id = "REB"
+name = "Rebels"
+description = "example"
+color = {200, 200, 200, 255}
+land = {9,3} & {9,2}

@@ -27,13 +27,21 @@ namespace PathGame
 
 		float cellSize = 36;
 
+		float m_time = 0.f;
+		int m_secondago = 1;
+
 	private:
 		NodeMap nodeMap;
 		MapGenerator mapGen;
 		MapMode mapMode;
 
+		/** Nations */
+		vector<Nation*> m_nations;
+
+		/** Map Tiles */
 		vector<terrainData> map;
 
+		/** NodePath */
 		vector<Node*> nodePath;
 
 		vector<Agent*> m_agents;
@@ -42,6 +50,7 @@ namespace PathGame
 	private:
 		void BeginPlay();
 
+		void Secondly();
 		void Tick(float dt);
 		void Render();
 

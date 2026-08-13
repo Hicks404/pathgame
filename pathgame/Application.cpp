@@ -7,7 +7,7 @@
 namespace PathGame
 {
 	Application::Application(int x_size, int y_size, const char* _title)
-		: xSize{ x_size }, ySize{ y_size }, title{ _title }
+		: xSize{ x_size }, ySize{ y_size }, title{ _title }, m_nations{}
 	{
 
 	}
@@ -54,10 +54,31 @@ namespace PathGame
 		selectedAgent->SetNodeMap(nodeMap);
 		selectedAgent->SetNode(nodeMap.GetClosestNode({ 200,200 }));
 		selectedAgent->SetSpeed(20);
+		
+		vector<Node*> land;
+		land.emplace_back(nodeMap.GetNodeFG(9,3));
+		land.emplace_back(nodeMap.GetNodeFG(9,2));
+		m_nations.emplace_back(new Nation("REB", land, {200,200,200,255}));
+	}
+
+	void Application::Secondly()
+	{
+		for (Nation* nation : m_nations)
+		{
+			nation->Update();
+		}
 	}
 
 	void Application::Tick(float dt)
 	{
+		m_time += dt;
+
+		if (m_time > m_secondago)
+		{
+			m_secondago += 1;
+			Secondly();
+		}
+
 		// Set map mode
 		nodeMap.SetMapMode(mapMode.GetMapMode());
 
@@ -99,6 +120,12 @@ namespace PathGame
 		{
 			delete agent;
 			agent = nullptr;
+		}
+
+		for (Nation* nation : m_nations)
+		{
+			delete nation;
+			nation = nullptr;
 		}
 	}
 }
