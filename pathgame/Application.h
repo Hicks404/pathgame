@@ -5,42 +5,46 @@
 #include "Pathfinding.h"
 #include "MapMode.h"
 #include "Agent.h"
+#include "Nations.h"
 
 using std::function;
 
-class Application
+namespace PathGame
 {
-public:
-	explicit Application(int x_size, int y_size, const char* _title);
-	~Application();
+	class Application
+	{
+	public:
+		explicit Application(int x_size, int y_size, const char* _title);
+		~Application();
 
-public:
-	int Run(float runTime = 0.f, const function<void()>& testStart = nullptr, const function<void()>& testCompleted = nullptr);
+	public:
+		int Run(float runTime = 0.f, const function<void()>& testStart = nullptr, const function<void()>& testCompleted = nullptr);
 
-private:
-	int xSize;
-	int ySize;
-	const char* title;
+	private:
+		int xSize;
+		int ySize;
+		const char* title;
 
-	float cellSize = 36;
+		float cellSize = 36;
 
-private:
-	NodeMap nodeMap;
-	MapGenerator mapGen;
-	MapMode mapMode;
+	private:
+		NodeMap nodeMap;
+		MapGenerator mapGen;
+		MapMode mapMode;
 
-	vector<terrainData> map;
+		vector<terrainData> map;
 
-	vector<Node*> nodePath;
+		vector<Node*> nodePath;
 
-	vector<Agent*> m_agents;
-	Agent* selectedAgent;
+		vector<Agent*> m_agents;
+		Agent* selectedAgent;
 
-private:
-	void BeginPlay();
+	private:
+		void BeginPlay();
 
-	void Tick(float dt);
-	void Render();
+		void Tick(float dt);
+		void Render();
 
-	void EndPlay();
+		void EndPlay();
+	};
 };

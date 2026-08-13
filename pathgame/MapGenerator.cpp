@@ -10,65 +10,68 @@ using std::ifstream;
 using std::getline;
 using std::stringstream;
 
-MapGenerator::MapGenerator()
+namespace PathGame
 {
-	terrain.SetData();
-
-	terrain.PrintTD("plains");
-}
-
-void MapGenerator::CreateMap()
-{
-	ifstream file("WorldMap.txt");
-	if (!file.is_open())
+	MapGenerator::MapGenerator()
 	{
-		std::cerr << "Error: File couldn't open Terrain Stats \n";
-		return;
+		terrain.SetData();
+
+		terrain.PrintTD("plains");
 	}
 
-	map.clear();
-
-	string line;
-	bool start = false;
-
-	while (getline(file, line))
+	void MapGenerator::CreateMap()
 	{
-		if (line.empty() || line.front() == '#')
+		ifstream file("WorldMap.txt");
+		if (!file.is_open())
 		{
-			// skip rest of loop
-			continue;
+			std::cerr << "Error: File couldn't open Terrain Stats \n";
+			return;
 		}
 
-		// find map start
-		if (line.front() == '[' && line.back() == ']')
-		{
-			start = true;
-			continue;
-		}
+		map.clear();
 
-		if (start)
-		{
-			string temp;
-			stringstream ss(line);
+		string line;
+		bool start = false;
 
-			// adds each letter into temp per loop
-			while (ss >> temp)
+		while (getline(file, line))
+		{
+			if (line.empty() || line.front() == '#')
 			{
-				map.emplace_back(terrain.GetTD(terrainSymbol[temp]));
+				// skip rest of loop
+				continue;
 			}
 
-			terrainData nextLineIndicator;
-			nextLineIndicator.name = "next";
-			map.emplace_back(nextLineIndicator);
+			// find map start
+			if (line.front() == '[' && line.back() == ']')
+			{
+				start = true;
+				continue;
+			}
 
-			continue;
+			if (start)
+			{
+				string temp;
+				stringstream ss(line);
+
+				// adds each letter into temp per loop
+				while (ss >> temp)
+				{
+					map.emplace_back(terrain.GetTD(terrainSymbol[temp]));
+				}
+
+				terrainData nextLineIndicator;
+				nextLineIndicator.name = "next";
+				map.emplace_back(nextLineIndicator);
+
+				continue;
+			}
 		}
+
+		file.close();
 	}
 
-	file.close();
-}
-
-vector<terrainData> MapGenerator::GetMap()
-{
-	return map;
+	vector<terrainData> MapGenerator::GetMap()
+	{
+		return map;
+	}
 }

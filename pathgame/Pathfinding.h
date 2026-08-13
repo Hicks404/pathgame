@@ -12,66 +12,69 @@ using std::string;
 using std::pow;
 using std::sqrt;
 
-struct Node;
-
-struct Edge
+namespace PathGame
 {
-	Node* target;
-	float cost;
-	bool water;
+	struct Node;
 
-public:
-	Edge(Node* _target, float _cost);
-	Edge(Node* _target, float _cost, bool _water);
-};
+	struct Edge
+	{
+		Node* target;
+		float cost;
+		bool water;
 
-struct Node
-{
-	Vector2 position;
-	vector<Edge> connections;
-	terrainData data;
+	public:
+		Edge(Node* _target, float _cost);
+		Edge(Node* _target, float _cost, bool _water);
+	};
 
-	float gScore;
-	Node* previous;
+	struct Node
+	{
+		Vector2 position;
+		vector<Edge> connections;
+		terrainData data;
 
-public:
-	Node(Vector2 pos, float cost);
-	Node(Vector2 pos, float cost, terrainData _data);
-	
-	void ConnectTo(Node* other, float cost, bool water);
-};
+		float gScore;
+		Node* previous;
 
-class NodeMap
-{
-public:
-	float m_cellSize;
+	public:
+		Node(Vector2 pos, float cost);
+		Node(Vector2 pos, float cost, terrainData _data);
 
-	vector<Node*> m_nodes;
+		void ConnectTo(Node* other, float cost, bool water);
+	};
 
-	MapModeEnum mode = Political;
+	class NodeMap
+	{
+	public:
+		float m_cellSize;
 
-private:
-	bool waterMode;
+		vector<Node*> m_nodes;
 
-public:
-	Node* GetNode(Vector2 pos);
+		MapModeEnum mode = Political;
 
-	Node* GetClosestNode(Vector2 pos);
+	private:
+		bool waterMode;
 
-	int MakeDivisible(int num, int div);
+	public:
+		Node* GetNode(Vector2 pos);
 
-	bool EqualVec(Vector2 vec1, Vector2 vec2);
+		Node* GetClosestNode(Vector2 pos);
 
-	void SetMapMode(MapModeEnum set);
+		int MakeDivisible(int num, int div);
 
-	vector<Node*> PathSearch(Node* start, Node* end);
+		bool EqualVec(Vector2 vec1, Vector2 vec2);
 
-public:
-	void Initialise(vector<terrainData> map, float cellSize);
+		void SetMapMode(MapModeEnum set);
 
-	void Draw();
+		vector<Node*> PathSearch(Node* start, Node* end);
 
-	void DrawPath(vector<Node*> nodeMapPath);
+	public:
+		void Initialise(vector<terrainData> map, float cellSize);
 
-	void End();
+		void Draw();
+
+		void DrawPath(vector<Node*> nodeMapPath);
+
+		void End();
+	};
 };

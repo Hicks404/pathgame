@@ -4,98 +4,101 @@
 #include <iostream>
 #include <raylib/raylib.h>
 
-Application::Application(int x_size, int y_size, const char* _title)
-	: xSize{ x_size }, ySize{ y_size }, title{ _title }
+namespace PathGame
 {
-	
-}
-
-Application::~Application() = default;
-
-int Application::Run(float runTime, const function<void()>& testStart, const function<void()>& testCompleted)
-{
-	srand(static_cast<uint32_t>(time(nullptr)));
-
-	InitWindow(xSize, ySize, title);
-
-	BeginPlay();
-
-	while (!WindowShouldClose())
+	Application::Application(int x_size, int y_size, const char* _title)
+		: xSize{ x_size }, ySize{ y_size }, title{ _title }
 	{
-		Tick(GetFrameTime());
 
-		BeginDrawing();
-		ClearBackground(RAYWHITE);
-
-		Render();
-
-		EndDrawing();
 	}
 
-	EndPlay();
+	Application::~Application() = default;
 
-	CloseWindow();
-
-	return EXIT_SUCCESS;
-}
-
-void Application::BeginPlay()
-{
-	// Create node map
-	mapGen.CreateMap();
-	nodeMap.Initialise(mapGen.GetMap(), cellSize);
-
-	mapMode.Init(xSize, ySize, cellSize);
-
-	selectedAgent = new Agent();
-	m_agents.emplace_back(selectedAgent);
-	selectedAgent->SetNodeMap(nodeMap);
-	selectedAgent->SetNode(nodeMap.GetClosestNode({ 200,200 }));
-	selectedAgent->SetSpeed(20);
-}
-
-void Application::Tick(float dt)
-{
-	// Set map mode
-	nodeMap.SetMapMode(mapMode.GetMapMode());
-
-	if (IsMouseButtonPressed(0))
+	int Application::Run(float runTime, const function<void()>& testStart, const function<void()>& testCompleted)
 	{
-		// Make path
-		Vector2 mos = GetMousePosition();
-		nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(selectedAgent->GetPosition()), nodeMap.GetClosestNode(mos));
+		srand(static_cast<uint32_t>(time(nullptr)));
 
-		selectedAgent->GoToNode(nodeMap.GetClosestNode(mos));
+		InitWindow(xSize, ySize, title);
+
+		BeginPlay();
+
+		while (!WindowShouldClose())
+		{
+			Tick(GetFrameTime());
+
+			BeginDrawing();
+			ClearBackground(RAYWHITE);
+
+			Render();
+
+			EndDrawing();
+		}
+
+		EndPlay();
+
+		CloseWindow();
+
+		return EXIT_SUCCESS;
 	}
 
-	mapMode.Tick(dt);
-
-	for (Agent* agent : m_agents)
+	void Application::BeginPlay()
 	{
-		agent->Update(dt);
+		// Create node map
+		mapGen.CreateMap();
+		nodeMap.Initialise(mapGen.GetMap(), cellSize);
+
+		mapMode.Init(xSize, ySize, cellSize);
+
+		selectedAgent = new Agent();
+		m_agents.emplace_back(selectedAgent);
+		selectedAgent->SetNodeMap(nodeMap);
+		selectedAgent->SetNode(nodeMap.GetClosestNode({ 200,200 }));
+		selectedAgent->SetSpeed(20);
 	}
-}
 
-void Application::Render()
-{
-	nodeMap.Draw();
-	nodeMap.DrawPath(nodePath);
-
-	mapMode.Render();
-
-	for (Agent* agent : m_agents)
+	void Application::Tick(float dt)
 	{
-		agent->Draw();
+		// Set map mode
+		nodeMap.SetMapMode(mapMode.GetMapMode());
+
+		if (IsMouseButtonPressed(0))
+		{
+			// Make path
+			Vector2 mos = GetMousePosition();
+			nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(selectedAgent->GetPosition()), nodeMap.GetClosestNode(mos));
+
+			selectedAgent->GoToNode(nodeMap.GetClosestNode(mos));
+		}
+
+		mapMode.Tick(dt);
+
+		for (Agent* agent : m_agents)
+		{
+			agent->Update(dt);
+		}
 	}
-}
 
-void Application::EndPlay()
-{
-	nodeMap.End();
-
-	for (Agent* agent : m_agents)
+	void Application::Render()
 	{
-		delete agent;
-		agent = nullptr;
+		nodeMap.Draw();
+		nodeMap.DrawPath(nodePath);
+
+		mapMode.Render();
+
+		for (Agent* agent : m_agents)
+		{
+			agent->Draw();
+		}
+	}
+
+	void Application::EndPlay()
+	{
+		nodeMap.End();
+
+		for (Agent* agent : m_agents)
+		{
+			delete agent;
+			agent = nullptr;
+		}
 	}
 }

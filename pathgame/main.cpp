@@ -10,7 +10,7 @@ int main(int argC, char* argV[])
     _CrtSetBreakAlloc(185); //Will automatically cause break point on allocationm with matching Id
 #endif
 
-    Application* app = new Application(1280, 720, "Path");
+    PathGame::Application* app = new PathGame::Application(1280, 720, "Path");
 
     const int state = app->Run();
 

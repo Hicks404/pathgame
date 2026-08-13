@@ -7,43 +7,51 @@
 using std::string;
 using std::unordered_map;
 
-struct terrainData
+namespace PathGame
 {
-public:
-	// front details
-	string name;
-	Color color = {0,0,0,255};
+	struct terrainData
+	{
+	public:
+		// front details
+		string name;
+		Color color = { 0,0,0,255 };
 
-public:
-	// modifiers
-	float moveSpeed;
-	float temperature;
-	float fertility;
-	float terrainCost;
+	public:
+		// modifiers
+		float moveSpeed;
+		float temperature;
+		float fertility;
+		float terrainCost;
 
-public:
-	// sets
-	bool water;
-	bool trees;
-};
+	public:
+		// sets
+		bool water;
+		bool trees;
 
-class Terrain
-{
-public:
-	Terrain();
+	public:
+		// nation related
+		int development;
+		string ownerID;
+	};
 
-public:
-	/** Setup data dictionary */
-	void SetData();
+	class Terrain
+	{
+	public:
+		Terrain();
 
-	terrainData GetTD(string name);
+	public:
+		/** Setup data dictionary */
+		void SetData();
 
-	/** Prints data of terrain given as string */
-	void PrintTD(string name);
+		terrainData GetTD(string name);
 
-private:
-	/** Removes front and end spaces from string */
-	string trim(const string& str);
+		/** Prints data of terrain given as string */
+		void PrintTD(string name);
 
-	unordered_map<string, terrainData> TerrainDataMap;
+	private:
+		/** Removes front and end spaces from string */
+		string trim(const string& str);
+
+		unordered_map<string, terrainData> TerrainDataMap;
+	};
 };

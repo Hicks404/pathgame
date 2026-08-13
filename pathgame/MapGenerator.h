@@ -9,37 +9,40 @@ using std::string;
 using std::vector;
 using std::unordered_map;
 
-inline unordered_map<string, string> terrainSymbol
+namespace PathGame
 {
-	{"a", "plains"},
-	{"b", "grasslands"},
-	{"c", "savannah"},
-	{"d", "steppe"},
-	{"e", "desert"},
-	{"f", "desertFlood"},
-	{"g", "tundra"},
-	{"h", "polar"},
-	{"i", "seaIce"},
-	{"j", "mountains"},
-	{"k", "shore"},
-	{"m", "ocean"},
-	{"n", "deepOcean"},
-	{"o", "forest"},
-	{"p", "marsh"},
-	{"q", "drylands"},
-	{"r", "jungle"}
-};
+	inline unordered_map<string, string> terrainSymbol
+	{
+		{"a", "plains"},
+		{"b", "grasslands"},
+		{"c", "savannah"},
+		{"d", "steppe"},
+		{"e", "desert"},
+		{"f", "desertFlood"},
+		{"g", "tundra"},
+		{"h", "polar"},
+		{"i", "seaIce"},
+		{"j", "mountains"},
+		{"k", "shore"},
+		{"m", "ocean"},
+		{"n", "deepOcean"},
+		{"o", "forest"},
+		{"p", "marsh"},
+		{"q", "drylands"},
+		{"r", "jungle"}
+	};
 
-class MapGenerator
-{
-public:
-	MapGenerator();
+	class MapGenerator
+	{
+	public:
+		MapGenerator();
 
-private:
-	vector<terrainData> map;
-	Terrain terrain;
+	private:
+		vector<terrainData> map;
+		Terrain terrain;
 
-public:
-	void CreateMap();
-	vector<terrainData> GetMap();
+	public:
+		void CreateMap();
+		vector<terrainData> GetMap();
+	};
 };
