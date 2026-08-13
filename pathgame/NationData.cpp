@@ -1,9 +1,12 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "NationData.h"
 
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <map>
+#include <algorithm>
 
 using std::fstream;
 using std::ifstream;
@@ -13,6 +16,11 @@ using std::stof;
 
 namespace PathGame
 {
+	NationDataClass::NationDataClass()
+	{
+
+	}
+
 	void NationDataClass::SetupData()
 	{
 		ifstream file("Nations.txt");
@@ -37,7 +45,7 @@ namespace PathGame
 			if (line.front() == '[' && line.back() == ']')
 			{
 				currentNation = line.substr(1, line.length() - 2);
-				nationDataMap[currentNation].name = currentNation;
+				nationDataMap[currentNation].id = currentNation;
 				continue;
 			}
 
@@ -50,17 +58,60 @@ namespace PathGame
 				string value = trim(line.substr(delimPos + 1));
 
 				// Save data
-				if (key == "id")
+				if (key == "name")
 				{
-					nationDataMap[currentNation].id = stof(value);
-				}
-				else if (key == "name")
-				{
-					nationDataMap[currentNation].name = stof(value);
+					nationDataMap[currentNation].name = value;
 				}
 				else if (key == "description")
 				{
-					nationDataMap[currentNation].description = stof(value);
+					nationDataMap[currentNation].description = value;
+				}
+				else if (key == "red")
+				{
+					nationDataMap[currentNation].color.r = stof(value);
+				}
+				else if (key == "green")
+				{
+					nationDataMap[currentNation].color.g = stof(value);
+				}
+				else if (key == "blue")
+				{
+					nationDataMap[currentNation].color.b = stof(value);
+				}
+				else if (key == "alpha")
+				{
+					nationDataMap[currentNation].color.a = stof(value);
+				}
+				else if (key == "land")
+				{
+					// Get each land vec
+					string vecStr;
+					bool collect = true;
+
+					for (char c : value)
+					{
+						if (c == '{')
+						{
+							collect = true;
+						}
+						else if (c == '}')
+						{
+							collect = false;
+						}
+						else if (collect)
+						{
+							vecStr += c;
+						}
+						else if (c == '&' && !collect)
+						{
+							// add land vec as data
+							Vector2 stor = { 0,0 };
+							int parsed = std::sscanf(vecStr.c_str(), "%f,%f", &stor.x, &stor.y);
+
+							nationDataMap[currentNation].landVec.emplace_back(stor);
+							vecStr = "";
+						}
+					}
 				}
 			}
 
@@ -90,5 +141,13 @@ namespace PathGame
 	unordered_map<string, NationData> NationDataClass::GetNationMap()
 	{
 		return nationDataMap;
+	}
+	Color NationDataClass::getColor(string id)
+	{
+		return nationDataMap[id].color;
+	}
+	NationData NationDataClass::nationOfId(string id)
+	{
+		return nationDataMap[id];
 	}
 }

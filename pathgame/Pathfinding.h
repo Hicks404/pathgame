@@ -6,6 +6,7 @@
 
 #include "TerrainTypes.h"
 #include "MapMode.h"
+#include "NationData.h"
 
 using std::vector;
 using std::string;
@@ -47,6 +48,8 @@ namespace PathGame
 	{
 	public:
 		float m_cellSize;
+
+		NationDataClass nationData;
 
 		vector<Node*> m_nodes;
 

@@ -14,22 +14,21 @@ namespace PathGame
 {
 	struct NationData
 	{
-	public:
 		string id;
 		string name;
 		string description;
 		Color color;
-
-	public:
 		vector<Vector2>landVec;
 	};
 
 	// map
-	unordered_map<string, NationData> nationDataMap;
+	static unordered_map<string, NationData> nationDataMap;
 
 	class NationDataClass
 	{
 	public:
+		NationDataClass();
+
 		void SetupData();
 
 	private:
@@ -38,5 +37,9 @@ namespace PathGame
 	public:
 		/** Get Unordered Map of NationData */
 		unordered_map<string, NationData> GetNationMap();
+
+		Color getColor(string id);
+
+		NationData nationOfId(string id);
 	};
 }

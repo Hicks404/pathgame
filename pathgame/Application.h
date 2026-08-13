@@ -1,13 +1,18 @@
 #pragma once
 #include <functional>
+#include <algorithm>
+#include <cmath>
 
 #include "MapGenerator.h"
 #include "Pathfinding.h"
 #include "MapMode.h"
 #include "Agent.h"
 #include "Nations.h"
+#include "NationData.h"
 
 using std::function;
+using std::to_string;
+using std::round;
 
 namespace PathGame
 {
@@ -34,6 +39,7 @@ namespace PathGame
 		NodeMap nodeMap;
 		MapGenerator mapGen;
 		MapMode mapMode;
+		NationDataClass nationData;
 
 		/** Nations */
 		vector<Nation*> m_nations;

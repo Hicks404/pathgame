@@ -49,16 +49,30 @@ namespace PathGame
 
 		mapMode.Init(xSize, ySize, cellSize);
 
+		nationData.SetupData();
+
 		selectedAgent = new Agent();
 		m_agents.emplace_back(selectedAgent);
 		selectedAgent->SetNodeMap(nodeMap);
 		selectedAgent->SetNode(nodeMap.GetClosestNode({ 200,200 }));
 		selectedAgent->SetSpeed(20);
 		
-		vector<Node*> land;
+		/*vector<Node*> land;
 		land.emplace_back(nodeMap.GetNodeFG(9,3));
 		land.emplace_back(nodeMap.GetNodeFG(9,2));
-		m_nations.emplace_back(new Nation("REB", land, {200,200,200,255}));
+		m_nations.emplace_back(new Nation("REB", land, {200,200,200,255}));*/
+
+		// Creates nations using data
+		for (const auto& [id, data] : nationData.GetNationMap())
+		{
+			vector<Node*> land;
+			for (Vector2 vec : data.landVec)
+			{
+				land.emplace_back(nodeMap.GetNodeFG(vec.x, vec.y));
+			}
+
+			m_nations.emplace_back(new Nation(id, data.name, land, data.color));
+		}
 	}
 
 	void Application::Secondly()
@@ -66,6 +80,8 @@ namespace PathGame
 		for (Nation* nation : m_nations)
 		{
 			nation->Update();
+
+			nation->SetNamePoints();
 		}
 	}
 
@@ -88,6 +104,8 @@ namespace PathGame
 			Vector2 mos = GetMousePosition();
 			nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(selectedAgent->GetPosition()), nodeMap.GetClosestNode(mos));
 
+			std::cout << round(mos.x/cellSize) << "," << round(mos.y/cellSize) << "\n";
+
 			selectedAgent->GoToNode(nodeMap.GetClosestNode(mos));
 		}
 
@@ -106,9 +124,16 @@ namespace PathGame
 
 		mapMode.Render();
 
+		// draw agents
 		for (Agent* agent : m_agents)
 		{
 			agent->Draw();
+		}
+
+		// draw nation name texts
+		for (Nation* nation : m_nations)
+		{
+			nation->DrawName();
 		}
 	}
 

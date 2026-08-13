@@ -64,7 +64,6 @@ namespace PathGame
 	Node* NodeMap::GetClosestNode(Vector2 pos)
 	{
 		float i = MakeDivisible(pos.x, m_cellSize);
-
 		float j = MakeDivisible(pos.y, m_cellSize);
 
 		return GetNode({ i, j });
@@ -271,19 +270,22 @@ namespace PathGame
 			switch (mode)
 			{
 			case Political:
-				if (node->data.ownerID == "REB")
+				if (node->data.ownerID.size() == 3)
 				{
-					tileCol = GRAY;
+					tileCol = nationData.getColor(node->data.ownerID);
 				}
 				break;
 
 			case Temperature:
-				tileCol = {
-					static_cast<unsigned char>(std::max(node->data.temperature * 5, 0.f)),
-					30,
-					static_cast<unsigned char>(std::max(155 - node->data.temperature * 5, 0.f)),
-					255
-				};
+				if (!node->data.water)
+				{
+					tileCol = {
+						static_cast<unsigned char>(std::max(node->data.temperature * 5, 0.f)),
+						30,
+						static_cast<unsigned char>(std::max(155 - node->data.temperature * 5, 0.f)),
+						255
+					};
+				}
 				break;
 			}
 
