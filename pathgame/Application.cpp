@@ -100,13 +100,16 @@ namespace PathGame
 
 		if (IsMouseButtonPressed(0))
 		{
-			// Make path
-			Vector2 mos = GetMousePosition();
-			nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(selectedAgent->GetPosition()), nodeMap.GetClosestNode(mos));
+			if (!mapMode.ButtonPress())
+			{
+				// Make path
+				Vector2 mos = GetMousePosition();
+				nodePath = nodeMap.PathSearch(nodeMap.GetClosestNode(selectedAgent->GetPosition()), nodeMap.GetClosestNode(mos));
 
-			std::cout << round(mos.x/cellSize) << "," << round(mos.y/cellSize) << "\n";
+				std::cout << round(mos.x / cellSize) << "," << round(mos.y / cellSize) << "\n";
 
-			selectedAgent->GoToNode(nodeMap.GetClosestNode(mos));
+				selectedAgent->GoToNode(nodeMap.GetClosestNode(mos));
+			}
 		}
 
 		mapMode.Tick(dt);

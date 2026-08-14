@@ -36,6 +36,26 @@ namespace PathGame
 		mode = newMode;
 	}
 
+	bool MapMode::ButtonPress()
+	{
+		bool pressed = false;
+
+		for (IconData data : IconVec)
+		{
+			Rectangle rect = { data.position.x, data.position.y, data.size.x, data.size.y };
+
+			Vector2 mousePos = GetMousePosition();
+
+			if (CheckCollisionPointRec(mousePos, rect))
+			{
+				mode = data.mode;
+				pressed = true;
+			}
+		}
+
+		return pressed;
+	}
+
 	void MapMode::Init(int _width, int _height, float _cellSize)
 	{
 		// save init stats
@@ -57,21 +77,7 @@ namespace PathGame
 
 	void MapMode::Tick(float dt)
 	{
-		// click to change mode
-		if (IsMouseButtonPressed(0))
-		{
-			for (IconData data : IconVec)
-			{
-				Rectangle rect = { data.position.x, data.position.y, data.size.x, data.size.y };
 
-				Vector2 mousePos = GetMousePosition();
-
-				if (CheckCollisionPointRec(mousePos, rect))
-				{
-					mode = data.mode;
-				}
-			}
-		}
 	}
 
 	void MapMode::Render()

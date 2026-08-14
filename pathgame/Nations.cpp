@@ -43,6 +43,9 @@ namespace PathGame
 
 	void Nation::SetNamePoints()
 	{
+		namePoint1 = land.front()->position;
+		namePoint2 = land.front()->position;
+
 		// get point positions
 		for (Node* node : land)
 		{

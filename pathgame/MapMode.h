@@ -63,6 +63,9 @@ namespace PathGame
 		/** Changes the Map Mode */
 		void ChangeMapMode(MapModeEnum newMode);
 
+		/** Button acitvation and returns if pressed */
+		bool ButtonPress();
+
 	public:
 		void Init(int _width, int _height, float _cellSize);
 
