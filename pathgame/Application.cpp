@@ -4,6 +4,7 @@
 #include <iostream>
 #include <raylib/raylib.h>
 
+// comment to test add
 namespace PathGame
 {
 	Application::Application(int x_size, int y_size, const char* _title)
